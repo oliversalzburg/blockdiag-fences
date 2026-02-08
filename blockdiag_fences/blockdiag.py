@@ -75,5 +75,17 @@ def fence_img_format(source, language, class_name, options, md, **kwargs):
         src_data = f'data:image/png;base64,{base64.b64encode(diagram).decode("ascii")}'
     else:
         src_data = f"data:image/svg+xml;charset=utf-8,{url_quote(diagram)}"
-    code = f'<img src="{src_data}">'
+
+    classes = kwargs.get('classes', [])
+    id_value = kwargs.get('id_value', '')
+    attrs = kwargs.get('attrs', {})
+
+    if class_name:
+        classes.insert(0, class_name)
+
+    id_attr = f' id="{id_value}"' if id_value else ''
+    class_attr = f' class="{" ".join(classes)}"' if classes else ''
+    extra_attrs = ' ' + ' '.join(f'{k}="{v}"' for k, v in attrs.items()) if attrs else ''
+
+    code = f'<img src="{src_data}"{id_attr}{class_attr}{extra_attrs}>'
     return code
