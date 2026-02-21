@@ -21,13 +21,8 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = "3.14.3"
-blockdiag = "3.0.0"
-seqdiag = "3.0.0"
-nwdiag = "3.0.0"
-actdiag = "3.0.0"
-
-[tool.poetry.dev-dependencies]
+python = ">3.12"
+blockdiag = { git = "https://github.com/yuzutech/blockdiag", tag = "v3.3.0" }
 
 [build-system]
 requires = ["poetry-core==1.9.0"]
