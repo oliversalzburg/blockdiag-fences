@@ -23,8 +23,8 @@ testing = ["docutils", "flake8", "flake8-coding", "flake8-copyright", "flake8-is
 
 [package.source]
 type = "git"
-url = "https://github.com/yuzutech/blockdiag"
-reference = "v3.3.0"
+url = "https://github.com/yuzutech/blockdiag.git"
+reference = "ebcfbb13b2c47eb90c522ec28b2dac0454b712ea"
 resolved_reference = "ebcfbb13b2c47eb90c522ec28b2dac0454b712ea"
 
 [[package]]
@@ -184,4 +184,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = ">3.12"
-content-hash = "2ab4c854e6d473701d2ea98e5214ab3dd9d52bf57908ea26607f75bd184caf95"
+content-hash = "09ef50ca3400ad40862f989fafd5273bef8ae34f006b1a5859c266f8d6bebed5"
