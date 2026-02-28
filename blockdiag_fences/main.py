@@ -20,6 +20,7 @@ from packetdiag import (
     drawer as packet_drawer,
 )
 from blockdiag.utils.fontmap import FontMap
+from markdown import markdown
 
 DIAG_MODULES = {
     "nwdiag": (nw_parser, nw_builder, nw_drawer),
@@ -82,8 +83,23 @@ def fence_img_format(source, language, class_name, options, md, **kwargs):
         classes.insert(0, class_name)
 
     id_attr = f' id="{id_value}"' if id_value else ''
-    class_attr = f' class="{" ".join(classes)}"' if classes else ''
+    class_attrs = f' class="{" ".join(classes)}"' if classes else ''
+    caption_raw = attrs.pop('caption', '')
     extra_attrs = ' ' + ' '.join(f'{k}="{v}"' for k, v in attrs.items()) if attrs else ''
 
-    code = f'<img src="{src_data}"{id_attr}{class_attr}{extra_attrs}>'
+    # add id and classes to <figure>,
+    # add extra attrs to <img>,
+    # add caption to <figcaption>:
+    caption_html = markdown(
+        caption_raw,
+        extensions=['attr_list', 'pymdownx.inlinehilite'],
+        output_format='html'
+    )
+
+    code = (
+        f'<figure{id_attr}{class_attrs}>\n'
+        f'  <img src="{src_data}"{extra_attrs}>\n'
+        f'  <figcaption>{caption_html}</figcaption>\n'
+        f'</figure>'
+    )
     return code
