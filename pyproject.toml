@@ -22,7 +22,7 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = ">3.12"
-blockdiag = { git = "https://github.com/yuzutech/blockdiag.git", rev = "ebcfbb13b2c47eb90c522ec28b2dac0454b712ea" }
+blockdiag = { git = "https://github.com/yuzutech/blockdiag.git", rev = "e2c2b672eb2050a6191dc037f48490e85c56dfca" }
 seqdiag = "3.0.0"
 nwdiag = "3.0.0"
 actdiag = "3.0.0"

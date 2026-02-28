@@ -43,8 +43,8 @@ testing = ["docutils", "flake8", "flake8-coding", "flake8-copyright", "flake8-is
 [package.source]
 type = "git"
 url = "https://github.com/yuzutech/blockdiag.git"
-reference = "ebcfbb13b2c47eb90c522ec28b2dac0454b712ea"
-resolved_reference = "ebcfbb13b2c47eb90c522ec28b2dac0454b712ea"
+reference = "e2c2b672eb2050a6191dc037f48490e85c56dfca"
+resolved_reference = "e2c2b672eb2050a6191dc037f48490e85c56dfca"
 
 [[package]]
 name = "funcparserlib"
@@ -241,4 +241,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = ">3.12"
-content-hash = "cac717ef1705d707e7da5d9f86c0b5bc750281790c8bea1c16f4a2dc3472d3a0"
+content-hash = "0a6f83461b97e475f492360aac9f13285c76160bf738834ab3956176f89eb0ac"
