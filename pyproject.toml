@@ -26,6 +26,9 @@ blockdiag = { git = "https://github.com/yuzutech/blockdiag.git", rev = "e2c2b672
 seqdiag = "3.0.0"
 nwdiag = "3.0.0"
 actdiag = "3.0.0"
+markdown = "^3.10.2"
+typing-extensions = "^4.15.0"
+pymdown-extensions = "^10.21"
 
 [build-system]
 requires = ["poetry-core==1.9.0"]

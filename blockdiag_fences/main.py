@@ -1,5 +1,6 @@
 from __future__ import absolute_import, unicode_literals
 import base64
+from typing_extensions import Literal
 from urllib.parse import quote as url_quote
 from nwdiag import parser as nw_parser, builder as nw_builder, drawer as nw_drawer
 from seqdiag import parser as seq_parser, builder as seq_builder, drawer as seq_drawer
@@ -22,6 +23,10 @@ from packetdiag import (
 from blockdiag.utils.fontmap import FontMap
 from markdown import markdown
 
+type DiagType = Literal[
+    "nwdiag", "seqdiag", "actdiag", "blockdiag", "rackdiag", "packetdiag"
+]
+
 DIAG_MODULES = {
     "nwdiag": (nw_parser, nw_builder, nw_drawer),
     "seqdiag": (seq_parser, seq_builder, seq_drawer),
@@ -33,8 +38,8 @@ DIAG_MODULES = {
 
 
 def draw_blockdiag(
-    content,
-    diag_type,
+    content: str,
+    diag_type: DiagType,
     filename=None,
     font_path=None,
     font_antialias=True,
@@ -62,7 +67,7 @@ def draw_blockdiag(
     return draw.save()
 
 
-def fence_img_format(source, language, class_name, options, md, **kwargs):
+def fence_img_format(source: str, language: DiagType, class_name: str = None, **kwargs):
     output_fmt = "svg"
     diagram = draw_blockdiag(
         source,
@@ -75,31 +80,33 @@ def fence_img_format(source, language, class_name, options, md, **kwargs):
     else:
         src_data = f"data:image/svg+xml;charset=utf-8,{url_quote(diagram)}"
 
-    classes = kwargs.get('classes', [])
-    id_value = kwargs.get('id_value', '')
-    attrs = kwargs.get('attrs', {})
+    classes = kwargs.get("classes", [])
+    id_value = kwargs.get("id_value", "")
+    attrs = kwargs.get("attrs", {})
 
     if class_name:
         classes.insert(0, class_name)
 
-    id_attr = f' id="{id_value}"' if id_value else ''
-    class_attrs = f' class="{" ".join(classes)}"' if classes else ''
-    caption_raw = attrs.pop('caption', '')
-    extra_attrs = ' ' + ' '.join(f'{k}="{v}"' for k, v in attrs.items()) if attrs else ''
+    id_attr = f' id="{id_value}"' if id_value else ""
+    class_attrs = f' class="{" ".join(classes)}"' if classes else ""
+    caption_raw = attrs.pop("caption", "")
+    extra_attrs = (
+        " " + " ".join(f'{k}="{v}"' for k, v in attrs.items()) if attrs else ""
+    )
 
     # add id and classes to <figure>,
     # add extra attrs to <img>,
     # add caption to <figcaption>:
     caption_html = markdown(
         caption_raw,
-        extensions=['attr_list', 'pymdownx.inlinehilite'],
-        output_format='html'
+        extensions=["attr_list", "pymdownx.inlinehilite"],
+        output_format="html",
     )
 
     code = (
-        f'<figure{id_attr}{class_attrs}>\n'
+        f"<figure{id_attr}{class_attrs}>\n"
         f'  <img src="{src_data}"{extra_attrs}>\n'
-        f'  <figcaption>{caption_html}</figcaption>\n'
-        f'</figure>'
+        f"  <figcaption>{caption_html}</figcaption>\n"
+        f"</figure>"
     )
     return code

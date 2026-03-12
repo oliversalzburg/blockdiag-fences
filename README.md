@@ -51,3 +51,7 @@ markdown_extensions:
         class: seqdiag
         format: !!python/name:blockdiag_fences.main.fence_img_format
 ```
+
+```
+poetry install
+```
